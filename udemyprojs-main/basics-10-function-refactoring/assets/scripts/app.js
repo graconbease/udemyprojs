@@ -70,3 +70,14 @@ addBtn.addEventListener('click', add);
 multiplyBtn.addEventListener('click', multiply);
 subtractBtn.addEventListener('click', subtract);
 divideBtn.addEventListener('click', divide);
+
+function fuckinFunction() {
+  if ( (5 === 5 && 3 > 6) || 10 < 5) {
+    alert("yeah!");
+  } else {
+    alert("FUCKKKKKKKK GODDAMN IT");
+  }
+}
+
+fuckinFunction();
+
