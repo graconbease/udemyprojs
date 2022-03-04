@@ -32,11 +32,21 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
     finalMonsterHealth: monsterHealth,
     finalPlayerHealth: playerHealth
   };
-  if (ev === LOG_EVENT_PLAYER_ATTACK || ev === LOG_EVENT_PLAYER_STRONG_ATTACK) {
-    logEntry.target = "MONSTER";
-  } else if (ev === LOG_EVENT_MONSTER_ATTACK || ev === LOG_EVENT_PLAYER_HEAL) {
-    logEntry.target = "PLAYER";
+  switch (ev) {
+    case LOG_EVENT_PLAYER_ATTACK:
+    case LOG_EVENT_PLAYER_STRONG_ATTACK: 
+      logEntry.target = "MONSTER";
+      break;
+    case LOG_EVENT_MONSTER_ATTACK:
+    case LOG_EVENT_PLAYER_HEAL:
+      logEntry.target = "PLAYER";
+      break;
   }
+  // if (ev === LOG_EVENT_PLAYER_ATTACK || ev === LOG_EVENT_PLAYER_STRONG_ATTACK) {
+    // logEntry.target = "MONSTER";
+  // } else if (ev === LOG_EVENT_MONSTER_ATTACK || ev === LOG_EVENT_PLAYER_HEAL) {
+    // logEntry.target = "PLAYER";
+  // }
   battleLog.push(logEntry);
 }
 
@@ -155,7 +165,15 @@ function strongAttackHandler() {
 }
 
 function printLogHandler() {
-  console.log(battleLog);
+  // for (let i = 0; i < battleLog.length; i++) {
+  //   console.log(battleLog[i]);
+  // }
+
+  for (const logEntry of battleLog) {
+    console.log(logEntry);
+  }
+
+  
 }
 
 attackBtn.addEventListener('click', attackHandler);
