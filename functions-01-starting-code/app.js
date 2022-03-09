@@ -12,8 +12,10 @@ let gameIsRunning = false;
 const getPlayerChoice = function() {
      let selection;
      while (true) {
-          selection = prompt(`${ROCK}, ${PAPER}, or ${SCISSORS}?`, "").toUpperCase();
-          if (
+          selection = prompt(`${ROCK}, ${PAPER}, or ${SCISSORS}?`, "");
+          if (selection === null) {
+               alert("Oops! Please pick an option");
+          } else if (
                selection !== ROCK && 
                selection !== PAPER && 
                selection !== SCISSORS
@@ -60,23 +62,33 @@ const getComputerChoice = function() {
 // person.greet();
 // console.dir(startGame);
 
-// startGameBtn.addEventListener("click", start);
-
 //you can also define a function within the button
 
-const getWinner = function(cChoice, pChoice) {
-     if (cChoice === pChoice) {
-          return RESULT_DRAW;
-     } else if (
-          (cChoice === ROCK && pChoice === PAPER) ||
+// startGameBtn.addEventListener("click", start);
+
+//arrow functions
+//useful for short functions
+const getWinner = (cChoice, pChoice) => //{
+     /*return*/ cChoice === pChoice 
+          ? RESULT_DRAW 
+          : (cChoice === ROCK && pChoice === PAPER) ||
           (cChoice === SCISSORS && pChoice === ROCK) ||
-          (cChoice === PAPER && pChoice === SCISSORS)
-     ) {
-          return RESULT_PLAYER_WIN;
-     } else {
-          return RESULT_COM_WINS;
-     }
-};
+          (cChoice === PAPER && pChoice === SCISSORS) 
+          ? RESULT_PLAYER_WIN
+          : RESULT_COM_WINS;
+
+     // if (cChoice === pChoice) {
+          // return RESULT_DRAW;
+     // } else if (
+          // (cChoice === ROCK && pChoice === PAPER) ||
+          // (cChoice === SCISSORS && pChoice === ROCK) ||
+          // (cChoice === PAPER && pChoice === SCISSORS)
+     // ) {
+          // return RESULT_PLAYER_WIN;
+     // } else {
+          // return RESULT_COM_WINS;
+     // }
+//};
 
 startGameBtn.addEventListener("click", function() {
      if (gameIsRunning) {
@@ -87,5 +99,25 @@ startGameBtn.addEventListener("click", function() {
      const playerChoice = getPlayerChoice();
      const computerChoice = getComputerChoice();
      const winner = getWinner(computerChoice, playerChoice);
-     console.log(winner);
+     let message = `You picked ${playerChoice} and I picked ${computerChoice}, so `;
+     if (winner === RESULT_DRAW) {
+          message = message + `we have a draw!`;           
+     } else if (winner === RESULT_PLAYER_WIN) {
+          message = message + `you won!`;
+     } else {
+          message = message + `you lost!`;
+     }
+     alert(message);
+     gameIsRunning = false;
 });
+
+//not game related
+//rest operator that creates an array out of all parameters
+//called
+const sumUp = (...numbers) => {
+     let sum = 0;
+     for (const num of numbers) {
+          sum += num;
+     }
+     return sum;
+}
