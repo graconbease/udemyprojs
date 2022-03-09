@@ -121,3 +121,23 @@ const sumUp = (...numbers) => {
      }
      return sum;
 }
+
+//you can use functions as parameters
+
+const showResult = (result) => {
+     alert("The result after adding all the numbers is " + result);
+};
+
+//call the following function with showResult as a parameter
+
+const summUp = (resultHandler,...numbers) => {
+     const validateNumber = (number) => {
+          return isNaN(number) ? 0 : number;
+     };
+
+     let sum = 0;
+     for (const num of numbers) {
+          sum += validateNumber(num);
+     }
+     resultHandler(sum);
+};
