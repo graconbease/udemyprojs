@@ -22,7 +22,24 @@ const sayHello3 = (name = DEFAULT_NAME) => {
 }
 
 const checkInput = (...strings) => {
+  for (const string of strings) {
+    if (string === "") {
+      return;
+    } else {
+      break;
+    }
+  }
   console.log("Input is sound");
 }
 
 sayHello();
+sayHello1();
+sayHello2();
+sayHello3();
+checkInput("");
+
+sayHello("Max");
+sayHello1("Max", "Yo");
+sayHello2();
+sayHello3("Max");
+checkInput("string", "uh string");
